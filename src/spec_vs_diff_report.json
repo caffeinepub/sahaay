@@ -1,0 +1,133 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-08T16:06:19.038Z",
+  "summary": "Diff implements a chat-first UI shell with sessions sidebar, language selector (EN/HI), disclaimer banner, quick-start tiles, and an India-inspired warm theme. Backend adds basic curated content types and session/message APIs (partially truncated). However, several acceptance criteria appear unimplemented or only partially implemented: backend curated modules/flows breadth, structured citations surfaced per response, guided flow intros, and some multilingual/persistence requirements.",
+  "missing_requirements": [
+    {
+      "id": "REQ-2",
+      "requirement": "Selected language persists across page refresh (e.g., local storage on frontend and/or backend profile).",
+      "reason": "Language persistence is required, but the diff does not show the language store implementation (only a localStorage helper exists). No evidence that the selected language is saved/loaded on refresh.",
+      "evidence": [
+        "frontend/src/components/sahaay/LanguageSelector.tsx",
+        "frontend/src/lib/persistence.ts"
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "requirement": "Guidance responses reflect the selected language for supported languages (minimum English + Hindi).",
+      "reason": "Backend sample curated dataset is English-only (knowledge/process/guide language = #en). getLanguageModules filters by language, so Hindi selection likely returns empty modules and falls back to a generic Hindi apology rather than curated Hindi guidance content.",
+      "evidence": [
+        "backend/main.mo",
+        "frontend/src/components/sahaay/MessageComposer.tsx",
+        "frontend/src/lib/guidance.ts"
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "requirement": "Backend exposes methods to list modules/topics, fetch a topic by id, and generate a guidance response from curated content + selected language (no external AI/LLM).",
+      "reason": "Backend shows getLanguageModules and disclaimer/capabilities/limitations, plus session APIs (truncated), but no explicit list-topics, fetch-by-id, or server-side 'generate guidance response' function is evidenced in the diff.",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "requirement": "At least 3 life-situation flows exist as structured step-by-step guidance (job loss, salary issue, fraud) including meaning, typical steps, documents to gather, and when to contact official channels.",
+      "reason": "Only one LifeGuide sample is added (Job Loss) and it is a single guidance string, not a structured step-by-step flow with documents/when-to-contact sections. Salary issue and fraud flows are not evidenced.",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "requirement": "Each guidance response can optionally include a ‘Sources’ section populated from backend-provided citations (title + URL + optional note).",
+      "reason": "Frontend has a SourcesBlock component, but MessageBubble explicitly uses a placeholder that always returns undefined for sources; assistant messages only carry `text` and do not include structured citations from the backend per response.",
+      "evidence": [
+        "frontend/src/components/sahaay/MessageBubble.tsx",
+        "frontend/src/components/sahaay/SourcesBlock.tsx",
+        "frontend/src/lib/guidance.ts"
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "requirement": "Persistent, visible disclaimer states: informational guidance only; not legal/professional advice; not a substitute for official sources; emergency disclaimer (e.g., 112).",
+      "reason": "DisclaimerBanner includes an emergency note (112) and general informational wording, but the backend disclaimer text shown is shorter and does not clearly include all specified points (not legal/professional advice; not a substitute for official sources).",
+      "evidence": [
+        "backend/main.mo",
+        "frontend/src/components/sahaay/DisclaimerBanner.tsx"
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "requirement": "Selecting a quick-start tile starts the appropriate guided flow and populates the first assistant message with the flow introduction.",
+      "reason": "Quick-start selection passes a `context` but ChatScreen inserts a generic welcome message (generateWelcomeMessage) rather than a flow-specific introduction, and does not show evidence of initiating a specific guided flow based on the selected tile.",
+      "evidence": [
+        "frontend/src/components/sahaay/ChatScreen.tsx",
+        "frontend/src/lib/quickStart.ts",
+        "frontend/src/lib/guidance.ts"
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "requirement": "Messages/sessions persist across refresh; each session stores messages, selected language, and chosen flow/topic context.",
+      "reason": "UI for multiple sessions exists, and backend has a Session type including `language` and `context`, but the diff does not show (a) local persistence wiring for sessions on the frontend or (b) restoration of sessions on reload; the session store implementation is not included in the diff.",
+      "evidence": [
+        "backend/main.mo",
+        "frontend/src/components/sahaay/SessionSidebar.tsx",
+        "frontend/src/lib/persistence.ts"
+      ]
+    }
+  ],
+  "hallucinated_features": [
+    {
+      "description": "Internet Identity authentication integration/hooks (login/identity management) beyond the MVP requirements.",
+      "reason": "The BuildRequest allows Internet Identity as optional, but it was not explicitly requested as a requirement; the diff adds substantial II provider and actor recreation logic.",
+      "evidence": [
+        "frontend/src/hooks/useActor.ts",
+        "frontend/src/hooks/useInternetIdentity.ts"
+      ]
+    },
+    {
+      "description": "Brand/footer attribution to caffeine.ai in the session sidebar.",
+      "reason": "Not requested in the BuildRequest requirements or acceptance criteria.",
+      "evidence": [
+        "frontend/src/components/sahaay/SessionSidebar.tsx"
+      ]
+    }
+  ],
+  "confidence": 0.72,
+  "changed_files": [
+    "all_files_summary.json",
+    "backend/main.mo",
+    "frontend-file-summaries.txt",
+    "frontend/index.css",
+    "frontend/index.html",
+    "frontend/src/App.tsx",
+    "frontend/src/components/sahaay/ChatScreen.tsx",
+    "frontend/src/components/sahaay/DisclaimerBanner.tsx",
+    "frontend/src/components/sahaay/Header.tsx",
+    "frontend/src/components/sahaay/LanguageSelector.tsx",
+    "frontend/src/components/sahaay/MessageBubble.tsx",
+    "frontend/src/components/sahaay/MessageComposer.tsx",
+    "frontend/src/components/sahaay/QuickStartTiles.tsx",
+    "frontend/src/components/sahaay/SafetyNote.tsx",
+    "frontend/src/components/sahaay/SessionSidebar.tsx",
+    "frontend/src/components/sahaay/SourcesBlock.tsx",
+    "frontend/src/components/sahaay/WhatSahaayCanDoDialog.tsx",
+    "frontend/src/hooks/useActor.ts",
+    "frontend/src/hooks/useInternetIdentity.ts",
+    "frontend/src/hooks/useQueries.ts",
+    "frontend/src/index.css",
+    "frontend/src/lib/guidance.ts",
+    "frontend/src/lib/persistence.ts",
+    "frontend/src/lib/quickStart.ts",
+    "frontend/src/lib/safety.ts",
+    "frontend/src/lib/utils.ts",
+    "frontend/src/main.tsx",
+    "frontend/src/state/language.ts",
+    "frontend/src/state/sessions.ts",
+    "frontend/tailwind.config.js",
+    "project_state.json"
+  ]
+}

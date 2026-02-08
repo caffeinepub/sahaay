@@ -1,0 +1,122 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "Building SAHAAY — India’s National AI Guide: a trust-first, legally safe, multilingual, chat-first citizen guidance platform that explains Indian laws, rights, government processes, and life situations in simple language (guidance/explanations only; no professional advice or decisions).",
+  "architectural_notes": [
+    "Positioning/constraint: citizen guidance system, not a chatbot clone; provides explanations and process clarity, not decisions or professional advice.",
+    "Priority pillars: legal safety, accuracy & trust, national-scale readiness, simplicity for non-technical users, India-first but global-ready."
+  ],
+  "known_issues": [],
+  "isFixRequest": false,
+  "imageRequirements": "## Required Images\n- SAHAAY logo mark, minimal, trustworthy, India-inspired geometric icon (sahaay-logo-mark.dim_512x512.png)\n- SAHAAY wordmark, clean sans-serif logotype, black/dark variant on transparent background (sahaay-wordmark.dim_1400x400.png)\n- Subtle background pattern, low-contrast, abstract India-inspired motif (sahaay-bg-pattern.dim_2000x2000.png)",
+  "existing_features": [
+    {
+      "id": "feature-create-the-sahaay-mvp-shell-with-a-chat-first-interface-for-citizen-guidance-web-the-ui-must-clearly-communicate-that-sahaay-provides-explanations-and-process-clarity-not-professional-advice-or-decisions",
+      "title": "Create the SAHAAY MVP shell with a chat-first interface for citizen guidance (web). The UI must clearly communicate that SAHAAY provides explanations and process clarity, not professional advice or decisions.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-multilingual-support-with-a-language-selector-and-a-language-preference-state-used-across-the-ui-and-guidance-responses-include-at-least-english-and-hindi-with-a-ui-that-can-be-extended-to-more-indian-languages-later",
+      "title": "Implement multilingual support with a language selector and a language-preference state used across the UI and guidance responses. Include at least: English and Hindi (with a UI that can be extended to more Indian languages later).",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-trust-safety-features-a-strong-disclaimers-b-source-citations-for-each-guidance-response-when-applicable-and-c-what-sahaay-can-can-t-do-panel-in-the-ui",
+      "title": "Implement trust & safety features: (a) strong disclaimers, (b) source citations for each guidance response when applicable, and (c) ‘What SAHAAY can/can’t do’ panel in the UI.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-guided-entry-experience-for-non-technical-users-provide-quick-start-tiles-buttons-for-common-situations-e-g-job-loss-salary-issue-fraud-and-common-intents-understand-a-law-right-understand-a-government-process",
+      "title": "Add a guided entry experience for non-technical users: provide quick-start tiles/buttons for common situations (e.g., Job loss, Salary issue, Fraud) and common intents (Understand a law/right, Understand a government process).",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-simple-conversation-session-model-users-can-have-multiple-saved-sessions-locally-and-or-in-the-backend-each-session-stores-messages-selected-language-and-chosen-flow-topic-context",
+      "title": "Create a simple conversation/session model: users can have multiple saved sessions locally and/or in the backend; each session stores messages, selected language, and chosen flow/topic context.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-define-and-apply-one-coherent-visual-theme-for-sahaay-india-first-trust-first-accessible-avoid-blue-purple-as-the-primary-palette-use-high-contrast-typography-clear-hierarchy-and-mobile-first-layout",
+      "title": "Define and apply one coherent visual theme for SAHAAY (India-first, trust-first, accessible). Avoid blue/purple as the primary palette. Use high-contrast typography, clear hierarchy, and mobile-first layout.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-generate-and-include-basic-static-brand-assets-for-sahaay-logo-mark-wordmark-subtle-background-pattern-and-render-them-from-the-frontend-as-static-files-under-frontend-public-assets-generated",
+      "title": "Generate and include basic static brand assets for SAHAAY (logo mark + wordmark + subtle background pattern) and render them from the frontend as static files under frontend/public/assets/generated.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Multilingual, chat-first citizen guidance platform (web/app) for India; simple UX for non-technical users",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Legal literacy module: explain Indian laws/rights in plain language with strong legal-safety posture (not legal advice; no decisions)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Government systems/process guidance module: explain schemes/forms/process steps (process clarity, not official submission)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Life-situation guidance flows (e.g., job loss, salary issues, fraud) that route users to relevant explanations and processes",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Trust & safety features: show sources, clear disclaimers, accuracy-first positioning",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Add curated knowledge modules in the backend for: (1) Laws & Rights explanations, (2) Government processes/schemes/process steps, and (3) Life-situation guided flows (e.g., job loss, salary issues, fraud). These modules should drive responses without relying on external AI/LLM services.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-12",
+      "summary": "Add an admin-free content bootstrap: ship the MVP with a small built-in curated dataset (topics, flows, and citations) compiled into the backend so the app works end-to-end without external dependencies.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "SAHAAY",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

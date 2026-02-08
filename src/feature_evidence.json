@@ -1,0 +1,158 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-create-the-sahaay-mvp-shell-with-a-chat-first-interface-for-citizen-guidance-web-the-ui-must-clearly-communicate-that-sahaay-provides-explanations-and-process-clarity-not-professional-advice-or-decisions",
+      "featureTitle": "Create the SAHAAY MVP shell with a chat-first interface for citizen guidance (web). The UI must clearly communicate that SAHAAY provides explanations and process clarity, not professional advice or decisions.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/sahaay/ChatScreen.tsx",
+        "frontend/src/components/sahaay/DisclaimerBanner.tsx",
+        "frontend/src/components/sahaay/Header.tsx",
+        "frontend/src/components/sahaay/MessageComposer.tsx",
+        "frontend/src/main.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-multilingual-support-with-a-language-selector-and-a-language-preference-state-used-across-the-ui-and-guidance-responses-include-at-least-english-and-hindi-with-a-ui-that-can-be-extended-to-more-indian-languages-later",
+      "featureTitle": "Implement multilingual support with a language selector and a language-preference state used across the UI and guidance responses. Include at least: English and Hindi (with a UI that can be extended to more Indian languages later).",
+      "files": [
+        "frontend/src/components/sahaay/ChatScreen.tsx",
+        "frontend/src/components/sahaay/Header.tsx",
+        "frontend/src/components/sahaay/LanguageSelector.tsx",
+        "frontend/src/lib/guidance.ts",
+        "frontend/src/state/language.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-trust-safety-features-a-strong-disclaimers-b-source-citations-for-each-guidance-response-when-applicable-and-c-what-sahaay-can-can-t-do-panel-in-the-ui",
+      "featureTitle": "Implement trust & safety features: (a) strong disclaimers, (b) source citations for each guidance response when applicable, and (c) ‘What SAHAAY can/can’t do’ panel in the UI.",
+      "files": [
+        "frontend/src/components/sahaay/ChatScreen.tsx",
+        "frontend/src/components/sahaay/DisclaimerBanner.tsx",
+        "frontend/src/components/sahaay/Header.tsx",
+        "frontend/src/components/sahaay/SafetyNote.tsx",
+        "frontend/src/components/sahaay/SourcesBlock.tsx",
+        "frontend/src/components/sahaay/WhatSahaayCanDoDialog.tsx",
+        "frontend/src/lib/safety.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-a-guided-entry-experience-for-non-technical-users-provide-quick-start-tiles-buttons-for-common-situations-e-g-job-loss-salary-issue-fraud-and-common-intents-understand-a-law-right-understand-a-government-process",
+      "featureTitle": "Add a guided entry experience for non-technical users: provide quick-start tiles/buttons for common situations (e.g., Job loss, Salary issue, Fraud) and common intents (Understand a law/right, Understand a government process).",
+      "files": [
+        "frontend/src/components/sahaay/ChatScreen.tsx",
+        "frontend/src/components/sahaay/Header.tsx",
+        "frontend/src/components/sahaay/QuickStartTiles.tsx",
+        "frontend/src/lib/quickStart.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-5"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-create-a-simple-conversation-session-model-users-can-have-multiple-saved-sessions-locally-and-or-in-the-backend-each-session-stores-messages-selected-language-and-chosen-flow-topic-context",
+      "featureTitle": "Create a simple conversation/session model: users can have multiple saved sessions locally and/or in the backend; each session stores messages, selected language, and chosen flow/topic context.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/sahaay/ChatScreen.tsx",
+        "frontend/src/components/sahaay/SessionSidebar.tsx",
+        "frontend/src/lib/persistence.ts",
+        "frontend/src/state/sessions.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-6"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-define-and-apply-one-coherent-visual-theme-for-sahaay-india-first-trust-first-accessible-avoid-blue-purple-as-the-primary-palette-use-high-contrast-typography-clear-hierarchy-and-mobile-first-layout",
+      "featureTitle": "Define and apply one coherent visual theme for SAHAAY (India-first, trust-first, accessible). Avoid blue/purple as the primary palette. Use high-contrast typography, clear hierarchy, and mobile-first layout.",
+      "files": [
+        "frontend/index.css",
+        "frontend/src/components/sahaay/ChatScreen.tsx",
+        "frontend/src/components/sahaay/DisclaimerBanner.tsx",
+        "frontend/src/components/sahaay/SessionSidebar.tsx",
+        "frontend/tailwind.config.js"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-8"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-generate-and-include-basic-static-brand-assets-for-sahaay-logo-mark-wordmark-subtle-background-pattern-and-render-them-from-the-frontend-as-static-files-under-frontend-public-assets-generated",
+      "featureTitle": "Generate and include basic static brand assets for SAHAAY (logo mark + wordmark + subtle background pattern) and render them from the frontend as static files under frontend/public/assets/generated.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/sahaay/Header.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-9"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

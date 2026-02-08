@@ -1,0 +1,275 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "SAHAAY MVP (frontend): Multilingual chat-first citizen guidance with safety, sessions, and branding",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Build the MVP shell: a chat-first screen with message history, input, visible disclaimers, and a clear 'new session' action.",
+      "acceptanceCriteria": [
+        "App loads to a primary chat-style screen with message history and an input area.",
+        "A persistent, visible disclaimer states: informational guidance only; not legal/professional advice; not a substitute for official sources; emergency disclaimer for urgent situations (e.g., police/112).",
+        "The UI includes an easy way to start a new session / clear conversation."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/main.tsx",
+          "operation": "modify",
+          "description": "Fix global stylesheet import so the app reliably loads base styles (update import from './index.css' to the actual location) and keep the app entry wiring intact."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "create",
+          "description": "Create the SAHAAY app shell and primary chat-first layout (header + chat area + composer), including a persistent disclaimer banner and a prominent 'New session / Start over' action."
+        },
+        {
+          "path": "frontend/src/components/sahaay/ChatScreen.tsx",
+          "operation": "create",
+          "description": "Implement the main chat UI (message list, assistant/user bubbles, timestamps, empty-state) and wire it to session state and guidance generation."
+        },
+        {
+          "path": "frontend/src/components/sahaay/MessageComposer.tsx",
+          "operation": "create",
+          "description": "Implement the message input area (multiline input, send action, basic validation) and integrate it with the current session and guidance response flow."
+        },
+        {
+          "path": "frontend/src/components/sahaay/DisclaimerBanner.tsx",
+          "operation": "create",
+          "description": "Add a persistent, high-visibility disclaimer component (informational only, not advice, not official substitute, emergency guidance for urgent situations)."
+        },
+        {
+          "path": "frontend/src/components/sahaay/Header.tsx",
+          "operation": "create",
+          "description": "Create a header that anchors trust messaging, houses the language selector, entry points to 'What SAHAAY can/can’t do', and shows brand assets."
+        },
+        {
+          "path": "frontend/src/components/sahaay/ui.ts",
+          "operation": "create",
+          "description": "Centralize reusable UI wrappers using shadcn-ui components (e.g., Button, Dialog, Select) to keep styling consistent. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Add multilingual support with an extendable language selector and persisted language preference used across UI and guidance responses (English + Hindi).",
+      "acceptanceCriteria": [
+        "User can switch language from a selector in the header/settings.",
+        "Selected language persists across page refresh (e.g., local storage on frontend and/or backend profile).",
+        "Guidance responses reflect the selected language for the supported languages (minimum English + Hindi).",
+        "All user-facing text in the build request is implemented in English by default; non-English content is limited to language-specific responses/translations."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/state/language.ts",
+          "operation": "create",
+          "description": "Add a small language preference store (English default, Hindi supported) with persistence to localStorage and a typed API for reading/updating language across the app."
+        },
+        {
+          "path": "frontend/src/components/sahaay/LanguageSelector.tsx",
+          "operation": "create",
+          "description": "Implement a header language selector using shadcn-ui Select to switch between English and Hindi. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/sahaay/Header.tsx",
+          "operation": "modify",
+          "description": "Wire LanguageSelector into the header and ensure the selected language is reflected across the UI."
+        },
+        {
+          "path": "frontend/src/lib/guidance.ts",
+          "operation": "create",
+          "description": "Implement frontend guidance composition logic that requests curated, language-specific content via the existing backend client and formats it into chat responses aligned with the selected language."
+        },
+        {
+          "path": "frontend/src/components/sahaay/ChatScreen.tsx",
+          "operation": "modify",
+          "description": "Ensure assistant responses and any flow/topic retrieval use the current selected language, and that language changes are applied predictably for new messages."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Implement trust & safety UI: strong disclaimers, per-response sources/citations, and a 'What SAHAAY can/can’t do' panel plus sensitive-situation safety notes.",
+      "acceptanceCriteria": [
+        "Each guidance response can optionally include a ‘Sources’ section populated from backend-provided citations (title + URL + optional note).",
+        "UI includes a dedicated panel or modal: ‘What SAHAAY can do’ and ‘What SAHAAY cannot do’, emphasizing non-advice positioning.",
+        "A safety note is shown for sensitive situations (e.g., fraud/harassment): direct users to official channels; no vigilantism; no sharing sensitive personal data."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/sahaay/WhatSahaayCanDoDialog.tsx",
+          "operation": "create",
+          "description": "Add a dedicated modal/panel for 'What SAHAAY can do' and 'What SAHAAY cannot do' using shadcn-ui Dialog. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/sahaay/Header.tsx",
+          "operation": "modify",
+          "description": "Add an entry point (button/link) to open the 'What SAHAAY can/can’t do' panel, keeping it always accessible from the main chat screen."
+        },
+        {
+          "path": "frontend/src/components/sahaay/SourcesBlock.tsx",
+          "operation": "create",
+          "description": "Render an optional 'Sources' section under assistant messages when citations are available (title/source + URL + optional descriptive note)."
+        },
+        {
+          "path": "frontend/src/components/sahaay/SafetyNote.tsx",
+          "operation": "create",
+          "description": "Add a standardized safety note component for sensitive situations (fraud/harassment): official channels, no vigilantism, and no sensitive personal data sharing."
+        },
+        {
+          "path": "frontend/src/lib/safety.ts",
+          "operation": "create",
+          "description": "Implement lightweight frontend classification helpers (based on selected quick-start flow/context and/or user keywords) to decide when to display SafetyNote."
+        },
+        {
+          "path": "frontend/src/components/sahaay/ChatScreen.tsx",
+          "operation": "modify",
+          "description": "Attach SourcesBlock and SafetyNote rendering to assistant responses when applicable, without reducing readability in the chat UI."
+        },
+        {
+          "path": "frontend/src/components/sahaay/DisclaimerBanner.tsx",
+          "operation": "modify",
+          "description": "Ensure disclaimers are strong, persistent, and consistent with the app’s non-advice posture, including urgent-situation guidance (e.g., 112/police) and official-source emphasis."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Add a guided entry experience with quick-start tiles for common situations and intents, with a 'Start over' path back to quick-start options.",
+      "acceptanceCriteria": [
+        "Chat screen shows a set of quick-start options before the first message in a new session.",
+        "Selecting a tile starts the appropriate guided flow and populates the first assistant message with the flow introduction.",
+        "Users can return to quick-start options via a ‘Start over’ action."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/sahaay/QuickStartTiles.tsx",
+          "operation": "create",
+          "description": "Create a quick-start tile grid (Job loss, Salary issue, Fraud, Understand a law/right, Understand a government process) optimized for non-technical users and mobile-first layout."
+        },
+        {
+          "path": "frontend/src/components/sahaay/ChatScreen.tsx",
+          "operation": "modify",
+          "description": "Show QuickStartTiles only for new/empty sessions and wire tile selection to initialize the correct flow/topic context and inject the first assistant message."
+        },
+        {
+          "path": "frontend/src/components/sahaay/Header.tsx",
+          "operation": "modify",
+          "description": "Add a 'Start over' action that clears the current context/messages as required (or opens a new session) and returns the UI to quick-start options."
+        },
+        {
+          "path": "frontend/src/lib/quickStart.ts",
+          "operation": "create",
+          "description": "Define quick-start option IDs, labels, and mapping to flow/topic context so the UI can be extended later without rewriting chat logic."
+        }
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "summary": "Implement a simple session model on the frontend: multiple sessions, session list UI, restore message history/context, and persistence across refresh.",
+      "acceptanceCriteria": [
+        "User can create a new session and view a list of recent sessions (basic sidebar or menu).",
+        "Selecting a session restores its message history and context.",
+        "Messages persist across refresh for the current user identity (anonymous local persistence is acceptable; Internet Identity integration can be used if available in the template)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/state/sessions.ts",
+          "operation": "create",
+          "description": "Implement session state management (current session, recent sessions list, selected language + context, messages) with persistence across refresh (localStorage) and optional hydration from backend when available."
+        },
+        {
+          "path": "frontend/src/components/sahaay/SessionSidebar.tsx",
+          "operation": "create",
+          "description": "Create a simple recent-sessions sidebar/drawer to list sessions, create a new session, and switch between sessions (mobile-friendly)."
+        },
+        {
+          "path": "frontend/src/components/sahaay/ChatScreen.tsx",
+          "operation": "modify",
+          "description": "Wire ChatScreen to the session store: show current session messages, append user/assistant messages, and restore messages/context when switching sessions."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire SessionSidebar into the app layout so sessions are navigable and the main chat screen is always reachable."
+        },
+        {
+          "path": "frontend/src/lib/persistence.ts",
+          "operation": "create",
+          "description": "Add small helpers for versioned localStorage persistence (e.g., sessions + language) to support safe future migrations."
+        }
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "summary": "Define and apply a coherent India-first, trust-first accessible theme (avoid blue/purple as primary), with mobile-first readable chat UI.",
+      "acceptanceCriteria": [
+        "The app uses a consistent color palette (not primarily blue/purple), typographic scale, spacing, and component styling across screens.",
+        "Chat UI is readable and accessible on mobile widths.",
+        "Theme is applied consistently to header, chat bubbles, buttons, and panels."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/index.css",
+          "operation": "modify",
+          "description": "Update CSS variables and base styles to an India-first, trust-first palette (avoid blue/purple primary), improve contrast/typography, and add app-level background treatment compatible with a subtle pattern."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Adjust theme tokens (colors/typography extensions as needed) to ensure consistent styling for header, chat bubbles, buttons, and safety panels across mobile-first layouts."
+        },
+        {
+          "path": "frontend/src/components/sahaay/ChatScreen.tsx",
+          "operation": "modify",
+          "description": "Apply consistent spacing, readable typography, and accessible contrast for chat bubbles and message list layout on narrow viewports."
+        },
+        {
+          "path": "frontend/src/components/sahaay/DisclaimerBanner.tsx",
+          "operation": "modify",
+          "description": "Style the disclaimer to be prominent but non-obstructive, ensuring high contrast and clear hierarchy."
+        },
+        {
+          "path": "frontend/src/components/sahaay/SessionSidebar.tsx",
+          "operation": "modify",
+          "description": "Ensure the sessions UI is mobile-friendly (collapsible/drawer behavior, large tap targets, clear hierarchy)."
+        }
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "summary": "Include static brand assets (logo mark, wordmark, background pattern) under frontend/public/assets/generated and reference them in the UI.",
+      "acceptanceCriteria": [
+        "Generated images exist in frontend/public/assets/generated and are referenced by the UI.",
+        "Header includes the SAHAAY logo/wordmark.",
+        "Landing/chat background uses a subtle pattern that does not reduce readability."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/public/assets/generated/sahaay-logo-mark.dim_512x512.png",
+          "operation": "create",
+          "description": "Add generated SAHAAY logo mark image asset as a static file at frontend/public/assets/generated/sahaay-logo-mark.dim_512x512.png."
+        },
+        {
+          "path": "frontend/public/assets/generated/sahaay-wordmark.dim_1400x400.png",
+          "operation": "create",
+          "description": "Add generated SAHAAY wordmark image asset as a static file at frontend/public/assets/generated/sahaay-wordmark.dim_1400x400.png."
+        },
+        {
+          "path": "frontend/public/assets/generated/sahaay-bg-pattern.dim_2000x2000.png",
+          "operation": "create",
+          "description": "Add generated SAHAAY subtle background pattern image asset as a static file at frontend/public/assets/generated/sahaay-bg-pattern.dim_2000x2000.png."
+        },
+        {
+          "path": "frontend/src/components/sahaay/Header.tsx",
+          "operation": "modify",
+          "description": "Reference the static brand assets in the header (logo mark + wordmark) with accessible alt text and sizing appropriate for mobile-first layout."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Apply the subtle background pattern to the chat/landing surface in a way that preserves readability (low-contrast usage and appropriate overlay/background layering)."
+        }
+      ]
+    }
+  ]
+}

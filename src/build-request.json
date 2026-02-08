@@ -1,0 +1,205 @@
+{
+  "kind": "build_request",
+  "title": "SAHAAY: Trust-first citizen guidance web app (multilingual, chat-first, safety-focused)",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Create the SAHAAY MVP shell with a chat-first interface for citizen guidance (web). The UI must clearly communicate that SAHAAY provides explanations and process clarity, not professional advice or decisions.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "SAHAAY is a multilingual, chat-first AI platform… It provides guidance, explanations, and process clarity, NOT decisions.",
+          "This is NOT a chatbot clone. This is a citizen guidance system.",
+          "Your priorities: Legal safety, Accuracy & trust, Scale across India, Simplicity for non-technical users"
+        ]
+      },
+      "acceptanceCriteria": [
+        "App loads to a primary chat-style screen with message history and an input area.",
+        "A persistent, visible disclaimer states: informational guidance only; not legal/professional advice; not a substitute for official sources; emergency disclaimer for urgent situations (e.g., police/112).",
+        "The UI includes an easy way to start a new session / clear conversation."
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Implement multilingual support with a language selector and a language-preference state used across the UI and guidance responses. Include at least: English and Hindi (with a UI that can be extended to more Indian languages later).",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "SAHAAY is a multilingual, chat-first AI platform"
+        ]
+      },
+      "acceptanceCriteria": [
+        "User can switch language from a selector in the header/settings.",
+        "Selected language persists across page refresh (e.g., local storage on frontend and/or backend profile).",
+        "Guidance responses reflect the selected language for the supported languages (minimum English + Hindi).",
+        "All user-facing text in the build request is implemented in English by default; non-English content is limited to language-specific responses/translations."
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Add curated knowledge modules in the backend for: (1) Laws & Rights explanations, (2) Government processes/schemes/process steps, and (3) Life-situation guided flows (e.g., job loss, salary issues, fraud). These modules should drive responses without relying on external AI/LLM services.",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "SAHAAY helps Indian citizens understand: Laws, Rights, Government processes, Life situations (job loss, salary issues, fraud, etc.)"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Backend exposes query/update methods to: list modules/topics, fetch a topic by id, and generate a guidance response from curated content + selected language.",
+        "At least 3 life-situation flows exist as structured step-by-step guidance (job loss, salary issue, fraud) with: what it means, typical steps, documents/info to gather, and when to contact official channels.",
+        "Content is clearly informational and avoids individualized legal conclusions or telling users what to do as definitive advice."
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Implement trust & safety features: (a) strong disclaimers, (b) source citations for each guidance response when applicable, and (c) ‘What SAHAAY can/can’t do’ panel in the UI.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Your priorities: Legal safety, Accuracy & trust",
+          "Hard to trust",
+          "SAHAAY explains complex systems in simple human language, without giving professional advice."
+        ]
+      },
+      "acceptanceCriteria": [
+        "Each guidance response can optionally include a ‘Sources’ section populated from backend-provided citations (title + URL + optional note).",
+        "UI includes a dedicated panel or modal: ‘What SAHAAY can do’ and ‘What SAHAAY cannot do’, emphasizing non-advice positioning.",
+        "A safety note is shown for sensitive situations (e.g., fraud/harassment): direct users to official channels; no vigilantism; no sharing sensitive personal data."
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Add a guided entry experience for non-technical users: provide quick-start tiles/buttons for common situations (e.g., Job loss, Salary issue, Fraud) and common intents (Understand a law/right, Understand a government process).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Simplicity for non-technical users",
+          "Life situations (job loss, salary issues, fraud, etc.)"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Chat screen shows a set of quick-start options before the first message in a new session.",
+        "Selecting a tile starts the appropriate guided flow and populates the first assistant message with the flow introduction.",
+        "Users can return to quick-start options via a ‘Start over’ action."
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "text": "Create a simple conversation/session model: users can have multiple saved sessions locally and/or in the backend; each session stores messages, selected language, and chosen flow/topic context.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "chat-first AI platform"
+        ]
+      },
+      "acceptanceCriteria": [
+        "User can create a new session and view a list of recent sessions (basic sidebar or menu).",
+        "Selecting a session restores its message history and context.",
+        "Messages persist across refresh for the current user identity (anonymous local persistence is acceptable; Internet Identity integration can be used if available in the template)."
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "text": "Add an admin-free content bootstrap: ship the MVP with a small built-in curated dataset (topics, flows, and citations) compiled into the backend so the app works end-to-end without external dependencies.",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Hard to trust",
+          "English-heavy",
+          "SAHAAY explains complex systems in simple human language"
+        ]
+      },
+      "acceptanceCriteria": [
+        "On first deploy, the app has a non-empty set of topics and flows available immediately.",
+        "Each included topic has plain-language explanation text and (when relevant) citations links.",
+        "No external database or external API is required for the MVP content."
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "text": "Define and apply one coherent visual theme for SAHAAY (India-first, trust-first, accessible). Avoid blue/purple as the primary palette. Use high-contrast typography, clear hierarchy, and mobile-first layout.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "India-first, global-ready",
+          "Simplicity for non-technical users",
+          "Accuracy & trust"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The app uses a consistent color palette (not primarily blue/purple), typographic scale, spacing, and component styling across screens.",
+        "Chat UI is readable and accessible on mobile widths.",
+        "Theme is applied consistently to header, chat bubbles, buttons, and panels."
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "text": "Generate and include basic static brand assets for SAHAAY (logo mark + wordmark + subtle background pattern) and render them from the frontend as static files under frontend/public/assets/generated.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Project: SAHAAY — India’s National AI Guide"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Generated images exist in frontend/public/assets/generated and are referenced by the UI.",
+        "Header includes the SAHAAY logo/wordmark.",
+        "Landing/chat background uses a subtle pattern that does not reduce readability."
+      ]
+    }
+  ],
+  "constraints": [],
+  "nonGoals": [],
+  "imageRequirements": {
+    "required": [
+      "SAHAAY logo mark, minimal, trustworthy, India-inspired geometric icon (sahaay-logo-mark.dim_512x512.png)",
+      "SAHAAY wordmark, clean sans-serif logotype, black/dark variant on transparent background (sahaay-wordmark.dim_1400x400.png)",
+      "Subtle background pattern, low-contrast, abstract India-inspired motif (sahaay-bg-pattern.dim_2000x2000.png)"
+    ],
+    "edits": []
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [
+      "Build SAHAAY: a trust-first, legally safe, multilingual, chat-first citizen guidance platform for India focused on laws/rights, government processes, and common life situations."
+    ],
+    "goalsToRemove": [],
+    "preferencesToAdd": [
+      "Prefer simple, accessible UX for non-technical users with strong safety disclaimers and source citations."
+    ],
+    "preferencesToRemove": [],
+    "miscToAdd": [
+      "Product posture: informational guidance only; not legal/professional advice; no decisions."
+    ],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
+  }
+}
